@@ -1,0 +1,82 @@
+﻿@model IEnumerable<PosterForm.Models.Order>
+
+@{
+    ViewBag.Title = "MyOrders";
+}
+
+<h2>My Previous Orders</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Department)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateIN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalCost)
+        </th>
+        <th id="Paid-label">
+            @Html.DisplayNameFor(model => model.Paid)
+        </th>
+        <th id="Printed-label">
+            @Html.DisplayNameFor(model => model.Printed)
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.UserName == this.User.Identity.Name)
+        {
+
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalCost)
+                </td>
+                <td>
+                    @if (item.Paid == true)
+                    {
+                        <input class="paidCheckBox" type="checkbox" name="@item.Id" checked="checked" aria-labelledby="Paid-label" />
+                    }
+                    else
+                    {
+                        <input class="paidCheckBox" type="checkbox" name="@item.Id" aria-labelledby="Paid-label" />
+                    }
+                </td>
+                <td>
+                    @if (item.Printed == true)
+                    {
+                        <input class="printedCheckBox" type="checkbox" name="@item.Id" checked="checked" aria-labelledby="Printed-label" />
+                    }
+                    else
+                    {
+                        <input class="printedCheckBox" type="checkbox" name="@item.Id" aria-labelledby="Printed-label" />
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
+
+</table>

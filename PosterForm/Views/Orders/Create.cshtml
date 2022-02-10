@@ -1,0 +1,276 @@
+﻿@using Microsoft.AspNet.Identity
+@using PosterForm.Models
+@model PosterForm.Models.Order
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Submit New Order</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Order</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Department, new List<SelectListItem> {
+                new SelectListItem{ Text="Please select a department", Value=""},
+                new SelectListItem{ Text="@One", Value="@One"},
+                new SelectListItem{ Text="Accounting", Value="Accounting"},
+                new SelectListItem{ Text="Administration", Value="Administration"},
+                new SelectListItem{ Text="Admissions", Value="Admissions"},
+                new SelectListItem{ Text="Agricultural Science", Value="Agricultural Science"},
+                new SelectListItem{ Text="Anthropology", Value="Anthropology"},
+                new SelectListItem{ Text="Art", Value="Art"},
+                new SelectListItem{ Text="ASUN", Value="ASUN"},
+                new SelectListItem{ Text="Athletics", Value="Athletics"},
+                new SelectListItem{ Text="Atmospheric Science", Value="Atmospheric Science"},
+                new SelectListItem{ Text="Basque Studies", Value="Basque Studies"},
+                new SelectListItem{ Text="Biochemistry", Value="Biochemistry"},
+                new SelectListItem{ Text="Biology", Value="Biology"},
+                new SelectListItem{ Text="Biomedical Engineering", Value="Biomedical Engineering"},
+                new SelectListItem{ Text="Biotechnology", Value="Biotechnology"},
+                new SelectListItem{ Text="Building Operations", Value="Building Operations"},
+                new SelectListItem{ Text="Biotechnology", Value="Biotechnology"},
+                new SelectListItem{ Text="Building Operations", Value="Building Operations"},
+                new SelectListItem{ Text="Business", Value="Business"},
+                new SelectListItem{ Text="Business Admin", Value="Business Admin"},
+                new SelectListItem{ Text="Business Management", Value="Business Management"},
+                new SelectListItem{ Text="Business Marketing", Value="Business Marketing"},
+                new SelectListItem{ Text="CABNR", Value="CABNR"},
+                new SelectListItem{ Text="CASAT", Value="CASAT"},
+                new SelectListItem{ Text="Center for Student Cultural Diversity", Value="Center for Student Cultural Diversity"},
+                new SelectListItem{ Text="Center for Student Engagement", Value="Center for Student Engagement"},
+                new SelectListItem{ Text="Chemical Engineering", Value="Chemical Engineering"},
+                new SelectListItem{ Text="Chemistry", Value="Chemistry"},
+                new SelectListItem{ Text="Civil Engineering", Value="Civil Engineering"},
+                new SelectListItem{ Text="College of Education", Value="College of Education"},
+                new SelectListItem{ Text="Communications", Value="Communications"},
+                new SelectListItem{ Text="Community Health Science", Value="Community Health Science"},
+                new SelectListItem{ Text="Computer Science Engineering", Value="Computer Science Engineering"},
+                new SelectListItem{ Text="Core Humanities", Value="Core Humanities"},
+                new SelectListItem{ Text="Counseling", Value="Counseling"},
+                new SelectListItem{ Text="Criminal Justice", Value="Criminal Justice"},
+                new SelectListItem{ Text="Dance", Value="Dance"},
+                new SelectListItem{ Text="Davidson Academy", Value="Davidson Academy"},
+                new SelectListItem{ Text="Desktop Services", Value="Desktop Services"},
+                new SelectListItem{ Text="Development and Alumni Relations", Value="Development and Alumni Relations"},
+                new SelectListItem{ Text="Digital Media", Value="Digital Media"},
+                new SelectListItem{ Text="Disability Resource Center", Value="Disability Resource Center"},
+                new SelectListItem{ Text="Ecohydrology", Value="Ecohydrology"},
+                new SelectListItem{ Text="Economics", Value="Economics"},
+                new SelectListItem{ Text="Education", Value="Education"},
+                new SelectListItem{ Text="Education Leadership", Value="Education Leadership"},
+                new SelectListItem{ Text="Electrical Engineering", Value="Electrical Engineering"},
+                new SelectListItem{ Text="Elementary Educatio", Value="Elementary Education"},
+                new SelectListItem{ Text="Engineering", Value="Engineering"},
+                new SelectListItem{ Text="English", Value="English"},
+                new SelectListItem{ Text="English Literature", Value="English Literature"},
+                new SelectListItem{ Text="Environmental Health &amp; Safety", Value="Environmental Health &amp; Safety"},
+                new SelectListItem{ Text="Environmental Science", Value="Environmental Science"},
+                new SelectListItem{ Text="Extended Studies", Value="Extended Studies"},
+                new SelectListItem{ Text="Facilities", Value="Facilities"},
+                new SelectListItem{ Text="Faculty/Staff", Value="Faculty/Staff"},
+                new SelectListItem{ Text="Finance", Value="Finance"},
+                new SelectListItem{ Text="Fine Arts", Value="Fine Arts"},
+                new SelectListItem{ Text="Foreign Language", Value="Foreign Language"},
+                new SelectListItem{ Text="French", Value="French"},
+                new SelectListItem{ Text="GEAR UP", Value="GEAR UP"},
+                new SelectListItem{ Text="Gender, Race, and Identity", Value="Gender, Race, and Identity"},
+                new SelectListItem{ Text="General Studies", Value="General Studies"},
+                new SelectListItem{ Text="Geography", Value="Geography"},
+                new SelectListItem{ Text="Geological Engineering", Value="Geological Engineering"},
+                new SelectListItem{ Text="Geology", Value="Geology"},
+                new SelectListItem{ Text="Gerontology", Value="Gerontology"},
+                new SelectListItem{ Text="Grad Special", Value="Grad Special"},
+                new SelectListItem{ Text="Graduate School", Value="Graduate School"},
+                new SelectListItem{ Text="HDFS", Value="HDFS"},
+                new SelectListItem{ Text="Health Science", Value="Health Science"},
+                new SelectListItem{ Text="History", Value="History"},
+                new SelectListItem{ Text="Honors", Value="Honors"},
+                new SelectListItem{ Text="Human Development", Value="Human Development"},
+                new SelectListItem{ Text="IELC", Value="IELC"},
+                new SelectListItem{ Text="Information Systems", Value="Information Systems"},
+                new SelectListItem{ Text="Information Technology in Education", Value="Information Technology in Education"},
+                new SelectListItem{ Text="Interdisciplinary", Value="Interdisciplinary"},
+                new SelectListItem{ Text="International Business &amp; Economics", Value="International Business &amp; Economics"},
+                new SelectListItem{ Text="International Relation", Value="International Relation"},
+                new SelectListItem{ Text="IT User Services", Value="IT User Services"},
+                new SelectListItem{ Text="JCSU", Value="JCSU"},
+                new SelectListItem{ Text="Journalism", Value="Journalism"},
+                new SelectListItem{ Text="Judicial College", Value="Judicial College"},
+                new SelectListItem{ Text="Kinesiology", Value="Kinesiology"},
+                new SelectListItem{ Text="Knowledge Center", Value="Knowledge Center"},
+                new SelectListItem{ Text="Liberal Arts", Value="Liberal Arts"},
+                new SelectListItem{ Text="Libraries", Value="Libraries"},
+                new SelectListItem{ Text="Library Services", Value="Library Services"},
+                new SelectListItem{ Text="LITA", Value="LITA"},
+                new SelectListItem{ Text="Lombardi", Value="Lombardi"},
+                new SelectListItem{ Text="Mackay School of Mines", Value="Mackay School of Mines"},
+                new SelectListItem{ Text="Management", Value="Management"},
+                new SelectListItem{ Text="Marketing", Value="Marketing"},
+                new SelectListItem{ Text="Material Science Engineering", Value="Material Science Engineering"},
+                new SelectListItem{ Text="Mathematics", Value="Mathematics"},
+                new SelectListItem{ Text="MBA", Value="MBA"},
+                new SelectListItem{ Text="Mechanical Engineering", Value="Mechanical Engineering"},
+                new SelectListItem{ Text="Medical School", Value="Medical School"},
+                new SelectListItem{ Text="Microbiology", Value="Microbiology"},
+                new SelectListItem{ Text="Mining Engineering", Value="Mining Engineering"},
+                new SelectListItem{ Text="MMI", Value="MMI"},
+                new SelectListItem{ Text="Molecular Microbiology and Immunology", Value="Molecular Microbiology and Immunology"},
+                new SelectListItem{ Text="Music", Value="Music"},
+                new SelectListItem{ Text="Music Education", Value="Music Education"},
+                new SelectListItem{ Text="NCED", Value="NCED"},
+                new SelectListItem{ Text="Neuroscience", Value="Neuroscience"},
+                new SelectListItem{ Text="Nevada Bureau of Mines and Geology", Value="Nevada Bureau of Mines and Geology"},
+                new SelectListItem{ Text="Nevada Teach", Value="Nevada Teach"},
+                new SelectListItem{ Text="NRES", Value="NRES"},
+                new SelectListItem{ Text="Nursing", Value="Nursing"},
+                new SelectListItem{ Text="Nutrition", Value="Nutrition"},
+                new SelectListItem{ Text="Office for Prospective Students", Value="Office for Prospective Students"},
+                new SelectListItem{ Text="OFX", Value="OFX"},
+                new SelectListItem{ Text="OISS", Value="OISS"},
+                new SelectListItem{ Text="Other", Value="Other"},
+                new SelectListItem{ Text="Philosophy", Value="Philosophy"},
+                new SelectListItem{ Text="Photography", Value="Photography"},
+                new SelectListItem{ Text="Physic", Value="Physic"},
+                new SelectListItem{ Text="Physical Therapy", Value="Physical Therapy"},
+                new SelectListItem{ Text="Physics", Value="Physics"},
+                new SelectListItem{ Text="Police Services", Value="Police Services"},
+                new SelectListItem{ Text="Political Science", Value="Political Science"},
+                new SelectListItem{ Text="Pre-Business", Value="Pre-Business"},
+                new SelectListItem{ Text="Pre-Nursing", Value="Pre-Nursing"},
+                new SelectListItem{ Text="Psychology", Value="Psychology"},
+                new SelectListItem{ Text="Public Health", Value="Public Health"},
+                new SelectListItem{ Text="Public Relations", Value="Public Relations"},
+                new SelectListItem{ Text="Rangeland Ecology and Management", Value="Rangeland Ecology and Management"},
+                new SelectListItem{ Text="Residential Life, Housing and Food Service", Value="Residential Life, Housing and Food Service"},
+                new SelectListItem{ Text="Residential Life, Housing, and Food Services", Value="Residential Life, Housing, and Food Services"},
+                new SelectListItem{ Text="School Counseling", Value="School Counseling"},
+                new SelectListItem{ Text="Secondary Education", Value="Secondary Education"},
+                new SelectListItem{ Text="Seismology", Value="Seismology"},
+                new SelectListItem{ Text="Smallwood Bootcamp", Value="Smallwood Bootcamp"},
+                new SelectListItem{ Text="Social Work", Value="Social Work"},
+                new SelectListItem{ Text="Sociology", Value="Sociology"},
+                new SelectListItem{ Text="Spanish", Value="Spanish"},
+                new SelectListItem{ Text="Special Education", Value="Special Education"},
+                new SelectListItem{ Text="Speech Communication", Value="Speech Communication"},
+                new SelectListItem{ Text="Speech Pathology", Value="Speech Pathology"},
+                new SelectListItem{ Text="STEM", Value="STEM"},
+                new SelectListItem{ Text="Student Conduct", Value="Student Conduct"},
+                new SelectListItem{ Text="Teaching &amp; Learning Technologies", Value="Teaching &amp; Learning Technologies"},
+                new SelectListItem{ Text="Theater", Value="Theater"},
+                new SelectListItem{ Text="TRiO", Value="TRiO"},
+                new SelectListItem{ Text="Undeclared", Value="Undeclared"},
+                new SelectListItem{ Text="University Libraries", Value="University Libraries"},
+                new SelectListItem{ Text="University of Nevada Cooperative Extension 4-H Youth Development", Value="University of Nevada Cooperative Extension 4-H Youth Development"},
+                new SelectListItem{ Text="Upward Bound", Value="Upward Bound"},
+                new SelectListItem{ Text="USAC", Value="USAC"},
+                new SelectListItem{ Text="Vet Science", Value="Vet Science"},
+                new SelectListItem{ Text="Veterinarian Medicine", Value="Veterinarian Medicine"},
+                new SelectListItem{ Text="Wildlife Ecology &amp; Conservation", Value="Wildlife Ecology &amp; Conservation"},
+                new SelectListItem{ Text="Wolf Pack Veterans Club", Value="Wolf Pack Veterans Club"},
+                new SelectListItem{ Text="Women's Studies", Value="Women's Studies"},
+                new SelectListItem{ Text="Writing", Value="Writing"},
+
+
+       })
+            @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+            <!-- <select id="Department" aria-labelledby="dept-label">
+        
+    </select> -->
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CustType, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.CustType, new List<SelectListItem> {
+                new SelectListItem{ Text="Please select a customer type", Value=""},
+                new SelectListItem{ Text="Student", Value="Student"},
+                new SelectListItem{ Text="Faculty", Value="Faculty"},
+                new SelectListItem{ Text="Classified Staff", Value="Classified Staff"},
+                new SelectListItem{ Text="Other", Value="Other"},
+
+       })
+            @Html.ValidationMessageFor(model => model.CustType, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Location, new List<SelectListItem> {
+                new SelectListItem{ Text="@One", Value="@One"},
+                new SelectListItem{ Text="DeLaMare", Value="DeLaMare"},
+                new SelectListItem{ Text="Savitt", Value="Savitt"},
+
+       })
+            @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Purpose, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Purpose, new List<SelectListItem> {
+                new SelectListItem{ Text="Academic", Value="Academic"},
+                new SelectListItem{ Text="Personal", Value="Personal"},
+                new SelectListItem{ Text="University-Related", Value="University-Related"},
+
+       })
+            @Html.ValidationMessageFor(model => model.Purpose, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="labels">NetID: @Html.DisplayFor(model => model.UserName)</div>
+       <div class="labels">Name: @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.UserName)</div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.Raw(User.Identity.Name)
+            <p>@{IdentityInfo.GetLastName(User)}</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DateIN, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DateIN, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DateIN, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TotalCost, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TotalCost, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TotalCost, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
