@@ -4,11 +4,8 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Queue</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -28,7 +25,7 @@
         </th>
         <th id="Printed-label">
             @Html.DisplayNameFor(model => model.Printed)
-        <th></th>
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -67,10 +64,10 @@
             <input class="printedCheckBox" type="checkbox" name="@item.Id" aria-labelledby="Printed-label" />
         }
     </td>
-    <td>
+    <td style="align-content:center">
         @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        @Html.ActionLink("Details", "Details", new { id = item.Id }) <!--|
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id })-->
     </td>
 </tr>
 }

@@ -14,9 +14,18 @@
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>Order</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserName, "Username :", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.Raw(User.Identity.Name)
+            <p>@{IdentityInfo.GetLastName(User);}</p>
+            @Html.HiddenFor(model => model.UserName, new { Value = this.User.Identity.Name })
+        </div>
+    </div>
+
     <div class="form-group">
         @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -184,13 +193,13 @@
        })
             @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
             <!-- <select id="Department" aria-labelledby="dept-label">
-        
-    </select> -->
+
+            </select> -->
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.CustType, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("Customer Type: ", new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownListFor(model => model.CustType, new List<SelectListItem> {
                 new SelectListItem{ Text="Please select a customer type", Value=""},
@@ -230,42 +239,51 @@
         </div>
     </div>
 
-
-
-    <div class="labels">NetID: @Html.DisplayFor(model => model.UserName)</div>
-       <div class="labels">Name: @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.UserName)</div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.Raw(User.Identity.Name)
-            <p>@{IdentityInfo.GetLastName(User)}</p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.DateIN, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.DateIN, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.DateIN, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.TotalCost, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.TotalCost, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.TotalCost, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <div id="mathSection">
+                <div style="display:flex; flex-direction: row;">
+                    <label>Width (In.) </label>
+                    <input type="text" id="PaperWidth" name="PaperWidth" oninput="calculateTotal" />
+                    <label>Height (In.) </label>
+                    <input type="text" id="PaperHeight" name="PaperHeight" oninput="calculateTotal" />
+                    <label>Item Units </label>
+                    <input type="text" id="ItemUnits" name="ItemUnits" oninput="calculateTotal" />
+                    <label># of Images </label>
+                    <input type="text" id="NumImages" name="NumImages" oninput="calculateTotal" />
+                    <label>
+                        Gloss Laminate (in.)
+                    </label>
+                    <input type="text" id="NumLam" name="NumLam" oninput="calculateTotal" />
+                    <label>
+                        Matte Laminate
+                        (in.)
+                    </label>
+                    <input type="text" id="NumLamMatte" name="NumLamMatte" oninput="calculateTotal" /><br />
+                </div>
+                    <div id="totalPrice"></div>
+                
+
+            </div>
         </div>
     </div>
-</div>
+
+
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.TotalCost, new { Value = 95 })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="submit" class="btn btn-default" id="btnSubmit" />
+            </div>
+        </div>
+    </div>
 }
+
+
 
 <div>
     @Html.ActionLink("Back to List", "Index")
@@ -274,3 +292,118 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script type="text/javascript">
+
+    document.getElementById("PaperHeight").addEventListener("input", calculateTotal);
+    document.getElementById("PaperWidth").addEventListener("input", calculateTotal);
+    document.getElementById("ItemUnits").addEventListener("input", calculateTotal);
+    document.getElementById("NumImages").addEventListener("input", calculateTotal);
+    document.getElementById("NumLam").addEventListener("input", calculateTotal);
+    document.getElementById("NumLamMatte").addEventListener("input", calculateTotal);
+    document.getElementById("PaperHeight").addEventListener("load", hideTotal);
+    function hideTotal() {
+        var divobj = document.getElementById('totalPrice');
+        divobj.style.display = 'none';
+    }
+
+    function round(value, decimals) {
+        return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
+    }
+    // local variables
+    function doDo() {
+        var height = document.getElementById("PaperHeight").value;
+        console.log(height)
+        var width = document.getElementById("PaperWidth").value;
+        //var cost = this.paperList.selected.get('price');
+        var units = 0;
+        var flooredHeight = 0;
+        var modOfHeight = 0;
+        var copies = round(document.getElementById("ItemUnits").value, 2);
+
+        //Adding rouding up and down for lamination 4/6/15
+        var lamHeight = document.getElementById("NumLam").value;
+        //var lamCost = Options.models[0].attributes.price;
+        var lamUnits = 0;
+        var flooredLam = 0;
+        var modOfLam = 0;
+
+        var lamHeightMatte = document.getElementById("NumLamMatte").value;
+        //var lamCostMatte = Options.models[0].attributes.price;
+        var lamUnitsMatte = 0;
+        var flooredLamMatte = 0;
+        var modOfLamMatte = 0;
+    }
+
+    function getWidth() {
+        //Assume form with id="theform"
+        var theForm = document.forms["mathSection"];
+        //Get a reference to the TextBox
+        var quantity = document.getElementById("PaperWidth");
+        var howmany = 0;
+        //If the textbox is not blank
+        if (quantity.value != "") {
+            howmany = parseInt(quantity.value);
+        }
+        return howmany;
+    }
+
+    function getHeight() {
+        //Assume form with id="theform"
+        var theForm = document.forms["mathSection"];
+        //Get a reference to the TextBox
+        var quantity = document.getElementById("PaperHeight");
+        var howmany = 0;
+        //If the textbox is not blank
+        if (quantity.value != "") {
+            howmany = parseInt(quantity.value);
+        }
+        return howmany;
+    }
+
+    function getItemUnits() {
+        //Assume form with id="theform"
+        var theForm = document.forms["mathSection"];
+        //Get a reference to the TextBox
+        var quantity = document.getElementById("ItemUnits");
+        var howmany = 0;
+        //If the textbox is not blank
+        if (quantity.value != "") {
+            howmany = parseInt(quantity.value);
+        }
+        return howmany;
+    }
+
+    function getNumImages() {
+        //Assume form with id="theform"
+        var theForm = document.forms["mathSection"];
+        //Get a reference to the TextBox
+        var quantity = document.getElementById("NumImages");
+        var howmany = 0;
+        //If the textbox is not blank
+        if (quantity.value != "") {
+            howmany = parseInt(quantity.value);
+        }
+        return howmany;
+    }
+
+    function calculateTotal() {
+        doDo()
+        //Here we get the total price by calling our function
+        //Each function returns a number so by calling them we add the values they return together
+        var totalSum = getWidth() + getHeight() + getItemUnits() * getNumImages();
+
+        //display the result
+        var divobj = document.getElementById('totalPrice').innerHTML = "Total Price is $" + totalSum;
+        //divobj.style.display = 'block';
+        divobj.innerHTML = "Your total is now: " + totalSum;
+    }
+
+    
+
+   // $(function () {
+   //     $("#btnSubmit").click(function () {
+   //         $("#postCost").value(totalSum);
+   //     });
+   // });
+</script>

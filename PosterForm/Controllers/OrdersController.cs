@@ -19,7 +19,7 @@ namespace PosterForm.Controllers
         private OrdersDBContext db = new OrdersDBContext();
 
         // GET: Orders
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string sortOrder)
         {
             return View(await db.Order.ToListAsync());
         }

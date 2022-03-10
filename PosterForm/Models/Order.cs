@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Web;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PosterForm.Models
 {
     public class Order
     {
+        public Order()
+        {
+            DateIN = DateTime.Now;
+            UserName = this.UserName;
+        }
         public int Id { get; set; }
         public string Department { get; set; }
         public string UserName { get; set; }

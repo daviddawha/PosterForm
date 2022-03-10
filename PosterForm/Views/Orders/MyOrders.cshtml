@@ -53,11 +53,16 @@
                 <td>
                     @if (item.Paid == true)
                     {
-                        <input class="paidCheckBox" type="checkbox" name="@item.Id" checked="checked" aria-labelledby="Paid-label" />
+                    <span class="checkmark">
+                        <div class="checkmark_stem"></div>
+                        <div class="checkmark_kick"></div>
+                    </span>
                     }
                     else
                     {
-                        <input class="paidCheckBox" type="checkbox" name="@item.Id" aria-labelledby="Paid-label" />
+                <span class="checkmark">
+                    <p>NO!</p>
+                </span>
                     }
                 </td>
                 <td>
@@ -69,11 +74,6 @@
                     {
                         <input class="printedCheckBox" type="checkbox" name="@item.Id" aria-labelledby="Printed-label" />
                     }
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 </td>
             </tr>
         }

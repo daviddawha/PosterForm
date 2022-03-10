@@ -20,5 +20,6 @@ namespace PosterForm.Data
         }
 
         public System.Data.Entity.DbSet<PosterForm.Models.Order> Order { get; set; }
+        public DbSet<Models.UserInRole> UserInRoles { get; set; }
     }
 }

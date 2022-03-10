@@ -2,30 +2,37 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "TermsConditions" }))
+{
+    <ol class="round">
+        <li class="one">
+            <h1>Terms and Conditions</h1>
+            <div style="margin-right:50px;" class="terms-conditions">
+                <br />
+                <span>The primary clientele of the @@One poster printing service is University of Nevada Reno students, faculty, and staff printing one-off posters for scholarly activities such as homework assignments, professional conference poster sessions, and college or department show-and-tell presentations.  An important but secondary clientele is departments, colleges, and university organizations requesting batch promotional print jobs (a batch job is defined as any request for more than 5 copies of a single print).</span>
+                <br /><br />
+                <b>To assure that we meet the needs of our primary clientele in a timely manner the following guidelines are established:</b>
+                <ol class="eula" style="padding-right:50px;margin-right:50px;">
+                    <li class="eula">Poster requests from primary clientele have top priority; these requests will be filled within 24 business hours, following payment and receipt of the poster print file;</li>
+                    <li class="eula">Orders should be picked up within 3 business days. Unclaimed orders after that time may be recycled or thrown away, with no refund or reprint given;</li>
+                    <li class="eula">Keep in mind that all images will print darker than what is seen on the computer screen. If color and/or brightness is important to you, let us know during the ordering process.  There will be no free reprints based on color gamut or brightness issues;</li>
+                    <li class="eula">@@One must not print materials intended to promote non-UNR organizations, or for monetary gain;</li>
+                    <li class="eula">The copyright law of the United States (Title 17, U.S. Code) governs the making of photocopies or other reproductions of copyrighted material. I do hereby declare and warrant that I am authorized to use the applicable content  in the file(s) which I am submitting for processing or printing and that the use of the content will not infringe upon any third-party’s copyright, patent, trademark trade secret or other proprietary or intellectual property rights. I hereby grant a non-exclusive license to the University of Nevada and its agents to reproduce these images and return them to my agents or me, and I represent that I have the legal right and authority to grant such a license. I agree to pay the charges for the processing and printing of these images and to indemnify and hold harmless the University of Nevada and its agents from any and all liability, damages, and expenses (including reasonable actual attorney's fees) that may incur as a result of processing or printing these images, including any claims brought by any person claiming an interest in the images or their subject matter. I understand the copyright laws pertaining to the ownership and reproduction of images, and I know that large monetary penalties may be assessed for illegally copying images;</li>
+                </ol>
+                <br />
+                The complete @@One Poster Printing Policy is posted online:
+                <a href="http://guides.library.unr.edu/posters/policies">http://guides.library.unr.edu/posters/policies</a>
+                <br />
+                <br />
+                <b>3D Printing Policy:</b>
+                <ol class="eula" style="padding-right:50px;margin-right:50px;">
+                    <li class="eula">The 3D printing patron assumes all responsibility for compliance with all local, state, and federal laws.</li>
+                    <li class="eula">The 3D printing patron assumes all responsibility for compliance with state, federal, and university policies and laws on intellectual property infringement, including patents, trademarks, and copyright.</li>
+                </ol>
+                <br />
+                <br />
+                <input type="submit" id="placeOrder" value="I Agree to the Terms and Conditions Above" />
+            </div>
+        </li>
+    </ol>
+}
