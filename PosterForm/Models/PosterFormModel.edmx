@@ -1,0 +1,563 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PosterFormConnectionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Extension" Type="nvarchar(max)" />
+          <Property Name="Size" Type="int" Nullable="false" />
+          <Property Name="LineId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Finishing">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Line">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="PaperTypeId" Type="int" Nullable="false" />
+          <Property Name="PaperTypeName" Type="nvarchar(max)" />
+          <Property Name="PaperCost" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="PaperWidth" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="PaperHeight" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="PaperUnits" Type="int" Nullable="false" />
+          <Property Name="ItemUnits" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="NumLam" Type="int" Nullable="false" />
+          <Property Name="PaperGrommet" Type="int" Nullable="false" />
+          <Property Name="NumBoards" Type="int" Nullable="false" />
+          <Property Name="LineSubtotal" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="NumFrame" Type="int" Nullable="false" />
+          <Property Name="NumRhyno" Type="int" Nullable="false" />
+          <Property Name="NumTubes" Type="int" Nullable="false" />
+          <Property Name="CuttingFee" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="NumLamMatte" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Author" Type="nvarchar(max)" />
+          <Property Name="DateEntered" Type="datetime" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="CustType" Type="nvarchar(max)" />
+          <Property Name="DateIN" Type="datetime" />
+          <Property Name="OperatorIN" Type="nvarchar(max)" />
+          <Property Name="TotalCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Paid" Type="bit" />
+          <Property Name="Printed" Type="bit" />
+          <Property Name="Ready" Type="bit" />
+          <Property Name="OperatorOut" Type="nvarchar(max)" />
+          <Property Name="DateOUT" Type="datetime" />
+          <Property Name="Location" Type="nvarchar(max)" />
+          <Property Name="Department" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="BadOrder" Type="bit" />
+          <Property Name="Purpose" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="OrderPack">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar(max)" />
+          <Property Name="Color" Type="nvarchar(max)" />
+          <Property Name="Printed" Type="bit" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Soaked" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaperType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Width" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInRole">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_File">
+          <End Role="Line" Type="Self.Line" Multiplicity="1" />
+          <End Role="File" Type="Self.File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Line">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="File">
+              <PropertyRef Name="LineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Line">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="Line" Type="Self.Line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Line">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Note">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="Note" Type="Self.Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderPack">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderPack" Type="Self.OrderPack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderPack">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PosterFormConnectionModelStoreContainer">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="File" EntityType="Self.File" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Finishing" EntityType="Self.Finishing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Line" EntityType="Self.Line" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Note" EntityType="Self.Note" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderPack" EntityType="Self.OrderPack" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaperType" EntityType="Self.PaperType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInRole" EntityType="Self.UserInRole" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_File" Association="Self.FK_File">
+            <End Role="Line" EntitySet="Line" />
+            <End Role="File" EntitySet="File" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Line" Association="Self.FK_Line">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Line" EntitySet="Line" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Note" Association="Self.FK_Note">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Note" EntitySet="Note" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderPack" Association="Self.FK_OrderPack">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderPack" EntitySet="OrderPack" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PosterFormConnectionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Extension" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="Int32" Nullable="false" />
+          <Property Name="LineId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Line" Relationship="Self.FK_File" FromRole="File" ToRole="Line" />
+        </EntityType>
+        <EntityType Name="Finishing">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Line">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="PaperTypeId" Type="Int32" Nullable="false" />
+          <Property Name="PaperTypeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PaperCost" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="PaperWidth" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="PaperHeight" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="PaperUnits" Type="Int32" Nullable="false" />
+          <Property Name="ItemUnits" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="NumLam" Type="Int32" Nullable="false" />
+          <Property Name="PaperGrommet" Type="Int32" Nullable="false" />
+          <Property Name="NumBoards" Type="Int32" Nullable="false" />
+          <Property Name="LineSubtotal" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="NumFrame" Type="Int32" Nullable="false" />
+          <Property Name="NumRhyno" Type="Int32" Nullable="false" />
+          <Property Name="NumTubes" Type="Int32" Nullable="false" />
+          <Property Name="CuttingFee" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="NumLamMatte" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="File" Relationship="Self.FK_File" FromRole="Line" ToRole="File" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Line" FromRole="Line" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Author" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateEntered" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Note" FromRole="Note" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CustType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateIN" Type="DateTime" Precision="3" />
+          <Property Name="OperatorIN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Paid" Type="Boolean" />
+          <Property Name="Printed" Type="Boolean" />
+          <Property Name="Ready" Type="Boolean" />
+          <Property Name="OperatorOut" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateOUT" Type="DateTime" Precision="3" />
+          <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BadOrder" Type="Boolean" />
+          <Property Name="Purpose" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Line" Relationship="Self.FK_Line" FromRole="Order" ToRole="Line" />
+          <NavigationProperty Name="Note" Relationship="Self.FK_Note" FromRole="Order" ToRole="Note" />
+          <NavigationProperty Name="OrderPack" Relationship="Self.FK_OrderPack" FromRole="Order" ToRole="OrderPack" />
+        </EntityType>
+        <EntityType Name="OrderPack">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Printed" Type="Boolean" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Soaked" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_OrderPack" FromRole="OrderPack" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="PaperType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Width" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInRole">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_File">
+          <End Role="Line" Type="Self.Line" Multiplicity="1" />
+          <End Role="File" Type="Self.File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Line">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="File">
+              <PropertyRef Name="LineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Line">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="Line" Type="Self.Line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Line">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Note">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="Note" Type="Self.Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderPack">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderPack" Type="Self.OrderPack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderPack">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PosterFormConnectionEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="File" EntityType="Self.File" />
+          <EntitySet Name="Finishing" EntityType="Self.Finishing" />
+          <EntitySet Name="Line" EntityType="Self.Line" />
+          <EntitySet Name="Note" EntityType="Self.Note" />
+          <EntitySet Name="Order" EntityType="Self.Order" />
+          <EntitySet Name="OrderPack" EntityType="Self.OrderPack" />
+          <EntitySet Name="PaperType" EntityType="Self.PaperType" />
+          <EntitySet Name="UserInRole" EntityType="Self.UserInRole" />
+          <AssociationSet Name="FK_File" Association="Self.FK_File">
+            <End Role="Line" EntitySet="Line" />
+            <End Role="File" EntitySet="File" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Line" Association="Self.FK_Line">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Line" EntitySet="Line" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Note" Association="Self.FK_Note">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Note" EntitySet="Note" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderPack" Association="Self.FK_OrderPack">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderPack" EntitySet="OrderPack" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PosterFormConnectionModelStoreContainer" CdmEntityContainer="PosterFormConnectionEntities">
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="PosterFormConnectionModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="File">
+            <EntityTypeMapping TypeName="PosterFormConnectionModel.File">
+              <MappingFragment StoreEntitySet="File">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="LineId" ColumnName="LineId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Finishing">
+            <EntityTypeMapping TypeName="PosterFormConnectionModel.Finishing">
+              <MappingFragment StoreEntitySet="Finishing">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Line">
+            <EntityTypeMapping TypeName="PosterFormConnectionModel.Line">
+              <MappingFragment StoreEntitySet="Line">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PaperTypeId" ColumnName="PaperTypeId" />
+                <ScalarProperty Name="PaperTypeName" ColumnName="PaperTypeName" />
+                <ScalarProperty Name="PaperCost" ColumnName="PaperCost" />
+                <ScalarProperty Name="PaperWidth" ColumnName="PaperWidth" />
+                <ScalarProperty Name="PaperHeight" ColumnName="PaperHeight" />
+                <ScalarProperty Name="PaperUnits" ColumnName="PaperUnits" />
+                <ScalarProperty Name="ItemUnits" ColumnName="ItemUnits" />
+                <ScalarProperty Name="NumLam" ColumnName="NumLam" />
+                <ScalarProperty Name="PaperGrommet" ColumnName="PaperGrommet" />
+                <ScalarProperty Name="NumBoards" ColumnName="NumBoards" />
+                <ScalarProperty Name="LineSubtotal" ColumnName="LineSubtotal" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="NumFrame" ColumnName="NumFrame" />
+                <ScalarProperty Name="NumRhyno" ColumnName="NumRhyno" />
+                <ScalarProperty Name="NumTubes" ColumnName="NumTubes" />
+                <ScalarProperty Name="CuttingFee" ColumnName="CuttingFee" />
+                <ScalarProperty Name="NumLamMatte" ColumnName="NumLamMatte" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Note">
+            <EntityTypeMapping TypeName="PosterFormConnectionModel.Note">
+              <MappingFragment StoreEntitySet="Note">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="PosterFormConnectionModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="CustType" ColumnName="CustType" />
+                <ScalarProperty Name="DateIN" ColumnName="DateIN" />
+                <ScalarProperty Name="OperatorIN" ColumnName="OperatorIN" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="Paid" ColumnName="Paid" />
+                <ScalarProperty Name="Printed" ColumnName="Printed" />
+                <ScalarProperty Name="Ready" ColumnName="Ready" />
+                <ScalarProperty Name="OperatorOut" ColumnName="OperatorOut" />
+                <ScalarProperty Name="DateOUT" ColumnName="DateOUT" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="BadOrder" ColumnName="BadOrder" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderPack">
+            <EntityTypeMapping TypeName="PosterFormConnectionModel.OrderPack">
+              <MappingFragment StoreEntitySet="OrderPack">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Printed" ColumnName="Printed" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Soaked" ColumnName="Soaked" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaperType">
+            <EntityTypeMapping TypeName="PosterFormConnectionModel.PaperType">
+              <MappingFragment StoreEntitySet="PaperType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInRole">
+            <EntityTypeMapping TypeName="PosterFormConnectionModel.UserInRole">
+              <MappingFragment StoreEntitySet="UserInRole">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

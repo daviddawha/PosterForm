@@ -11,11 +11,15 @@ namespace PosterForm.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class UserInRole
+    
+    public partial class File
     {
-        [Key]
-        public string UserName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Extension { get; set; }
+        public int Size { get; set; }
+        public int LineId { get; set; }
+    
+        public virtual Line Line { get; set; }
     }
 }

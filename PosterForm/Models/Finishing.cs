@@ -11,11 +11,11 @@ namespace PosterForm.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class UserInRole
+    
+    public partial class Finishing
     {
-        [Key]
-        public string UserName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
     }
 }

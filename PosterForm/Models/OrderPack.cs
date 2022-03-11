@@ -11,11 +11,17 @@ namespace PosterForm.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class UserInRole
+    
+    public partial class OrderPack
     {
-        [Key]
-        public string UserName { get; set; }
+        public int Id { get; set; }
+        public int OrderId { get; set; }
+        public string FileName { get; set; }
+        public string Color { get; set; }
+        public bool Printed { get; set; }
+        public int Quantity { get; set; }
+        public bool Soaked { get; set; }
+    
+        public virtual Order Order { get; set; }
     }
 }

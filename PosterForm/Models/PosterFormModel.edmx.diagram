@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4903be0522a14c519aa3e34f66a5e91d" Name="Diagram1">
+        <EntityTypeShape EntityType="PosterFormConnectionModel.AspNetUsers" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosterFormConnectionModel.File" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosterFormConnectionModel.Finishing" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosterFormConnectionModel.Line" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosterFormConnectionModel.Note" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosterFormConnectionModel.Order" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosterFormConnectionModel.OrderPack" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosterFormConnectionModel.PaperType" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PosterFormConnectionModel.UserInRole" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="PosterFormConnectionModel.FK_File" ManuallyRouted="false" />
+        <AssociationConnector Association="PosterFormConnectionModel.FK_Line" ManuallyRouted="false" />
+        <AssociationConnector Association="PosterFormConnectionModel.FK_Note" ManuallyRouted="false" />
+        <AssociationConnector Association="PosterFormConnectionModel.FK_OrderPack" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

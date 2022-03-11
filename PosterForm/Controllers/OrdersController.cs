@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using PosterForm.Data;
 using PosterForm.Models;
 using System.Security.Claims;
 
@@ -16,7 +15,7 @@ namespace PosterForm.Controllers
     [Authorize]
     public class OrdersController : Controller
     {
-        private OrdersDBContext db = new OrdersDBContext();
+        private PosterFormConnectionEntities db = new PosterFormConnectionEntities();
 
         // GET: Orders
         public async Task<ActionResult> Index(string sortOrder)
@@ -56,11 +55,12 @@ namespace PosterForm.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Department,UserName,DateIN,TotalCost,Paid,Printed,OperatorOut,FirstName,LastName,Location,Purpose,CustType")] Order order)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Department,UserName,DateIN,TotalCost,Paid,Printed,OperatorOut,FirstName,LastName,Location,Purpose,CustType")] Order order, [Bind(Include = "Id, PaperTypeId, Paper, PaperTypeName, PaperCost, PaperWidth, PaperHeight, PaperUnits, ItemUnits, NumLam, PaperGrommet, NumBoards, LineSubtotal, OrderId, NumFrame, NumRhyno, NumTubes, CuttingFee, NumLamMatte")] Line Line)
         {
             if (ModelState.IsValid)
             {
                 db.Order.Add(order);
+                db.Line.Add(Line);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

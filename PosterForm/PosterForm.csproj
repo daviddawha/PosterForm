@@ -57,6 +57,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -173,15 +175,55 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
-    <Compile Include="Data\OrdersDBContext.cs" />
+    <Compile Include="Controllers\UserInRoleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetUsers.cs">
+      <DependentUpon>PosterFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\File.cs">
+      <DependentUpon>PosterFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Finishing.cs">
+      <DependentUpon>PosterFormModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Line.cs">
+      <DependentUpon>PosterFormModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\UserInRole.cs" />
+    <Compile Include="Models\Note.cs">
+      <DependentUpon>PosterFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>PosterFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderPack.cs">
+      <DependentUpon>PosterFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PaperType.cs">
+      <DependentUpon>PosterFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PosterFormModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PosterFormModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PosterFormModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PosterFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PosterFormModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PosterFormModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserInRole.cs">
+      <DependentUpon>PosterFormModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -362,6 +404,16 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\uni_logo.png" />
+    <Content Include="Models\PosterFormModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PosterFormModel.edmx</DependentUpon>
+      <LastGenOutput>PosterFormModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\PosterFormModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PosterFormModel.edmx</DependentUpon>
+      <LastGenOutput>PosterFormModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\backbone.js" />
     <Content Include="Scripts\backbone.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -370,6 +422,13 @@
     <Content Include="Scripts\backbone.min.map" />
     <Content Include="Content\kendo\2014.1.318\images\kendoui.woff" />
     <Content Include="Content\kendo\2014.1.318\images\kendoui.ttf" />
+    <EntityDeploy Include="Models\PosterFormModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PosterFormModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\PosterFormModel.edmx.diagram">
+      <DependentUpon>PosterFormModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\FileAPI.flash.swf" />
     <Content Include="Scripts\FileAPI.js" />
@@ -1065,9 +1124,15 @@
     <Content Include="Scripts\tinymce\skins\ui\oxide-dark\fonts\tinymce-mobile.woff" />
     <Content Include="Scripts\tinymce\langs\README.md" />
     <Content Include="Scripts\tinymce\tsconfig.json" />
+    <Content Include="Views\UserInRole\Create.cshtml" />
+    <Content Include="Views\UserInRole\Delete.cshtml" />
+    <Content Include="Views\UserInRole\Details.cshtml" />
+    <Content Include="Views\UserInRole\Edit.cshtml" />
+    <Content Include="Views\UserInRole\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -1087,6 +1152,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

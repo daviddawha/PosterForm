@@ -21,7 +21,6 @@
         @Html.LabelFor(model => model.UserName, "Username :", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.Raw(User.Identity.Name)
-            <p>@{IdentityInfo.GetLastName(User);}</p>
             @Html.HiddenFor(model => model.UserName, new { Value = this.User.Identity.Name })
         </div>
     </div>
