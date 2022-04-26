@@ -1,0 +1,129 @@
+﻿@model IEnumerable<PosterForm.Models.Line>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PaperTypeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaperTypeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaperCost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaperWidth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaperHeight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaperUnits)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemUnits)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumLam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaperGrommet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumBoards)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LineSubtotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumFrame)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumRhyno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumTubes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CuttingFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumLamMatte)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Order.UserName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaperTypeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaperTypeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaperCost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaperWidth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaperHeight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaperUnits)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemUnits)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumLam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaperGrommet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumBoards)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LineSubtotal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumFrame)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumRhyno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumTubes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CuttingFee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumLamMatte)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Order.UserName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

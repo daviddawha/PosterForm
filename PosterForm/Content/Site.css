@@ -149,3 +149,12 @@ th {
     font-size: 1rem;
     vertical-align: middle;
 }
+
+#dropZone {
+    background: gray;
+    border: black dashed 3px;
+    width: 200px;
+    padding: 50px;
+    text-align: center;
+    color: white;
+}

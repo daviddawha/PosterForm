@@ -11,11 +11,9 @@ namespace PosterForm.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class UserInRole
     {
-        [Key]
         public string UserName { get; set; }
     }
 }

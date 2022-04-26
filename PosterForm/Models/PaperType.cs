@@ -18,5 +18,6 @@ namespace PosterForm.Models
         public string Name { get; set; }
         public int Width { get; set; }
         public decimal Price { get; set; }
+        public string PAPERNameAndPrice { get { return this.Name + " " + this.Price; } }
     }
 }

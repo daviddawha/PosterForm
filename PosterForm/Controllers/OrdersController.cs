@@ -55,12 +55,12 @@ namespace PosterForm.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Department,UserName,DateIN,TotalCost,Paid,Printed,OperatorOut,FirstName,LastName,Location,Purpose,CustType")] Order order, [Bind(Include = "Id, PaperTypeId, Paper, PaperTypeName, PaperCost, PaperWidth, PaperHeight, PaperUnits, ItemUnits, NumLam, PaperGrommet, NumBoards, LineSubtotal, OrderId, NumFrame, NumRhyno, NumTubes, CuttingFee, NumLamMatte")] Line Line)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Department,UserName,DateIN,TotalCost,Paid,Printed,OperatorOut,FirstName,LastName,Location,Purpose,CustType")] Order order)
         {
             if (ModelState.IsValid)
             {
+                order.DateIN = DateTime.Now;
                 db.Order.Add(order);
-                db.Line.Add(Line);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

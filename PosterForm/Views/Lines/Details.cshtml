@@ -1,0 +1,154 @@
+﻿@model PosterForm.Models.Line
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Line</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PaperTypeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaperTypeId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaperTypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaperTypeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaperCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaperCost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaperWidth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaperWidth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaperHeight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaperHeight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaperUnits)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaperUnits)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemUnits)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemUnits)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumLam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumLam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaperGrommet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaperGrommet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumBoards)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumBoards)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LineSubtotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LineSubtotal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumFrame)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumFrame)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumRhyno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumRhyno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumTubes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumTubes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CuttingFee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CuttingFee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumLamMatte)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumLamMatte)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
