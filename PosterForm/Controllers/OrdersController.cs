@@ -26,7 +26,13 @@ namespace PosterForm.Controllers
         // GET: MyOrders
         public async Task<ActionResult> MyOrders()
         {
+            IOrderedQueryable<Order> orderByResult = from s in db.Order
+                                                     orderby s.DateIN descending //Sorts the studentList collection in ascending order
+                                                     select s;
+
             return View(await db.Order.ToListAsync());
+
+            
         }
 
         // GET: Orders/Details/5

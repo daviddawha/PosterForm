@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -30,11 +31,17 @@ textarea {
 @media (min-width: 768px) {
     .form-horizontal .control-label {
         padding-top: 0;
+        text-align: left!important;
     }
 }
 
 .lineItem-label {
     font-weight: 500 !important;
+}
+
+.formlabel{
+    margin-bottom: 15px;
+    font-weight:900;
 }
 
 div#totalPrice {
@@ -48,10 +55,22 @@ input#PaperHeight, input#PaperWidth, input#ItemUnits, input#NumImages, input#Num
     margin: 5px;
 }
 
+.spaceinput {
+    max-width: 90px;
+    margin: 5px;
+    margin-right: 12px!important;
+}
+
+.labelshort {
+    width:auto;
+}
+
 div#mathSection {
     border-style: solid !important;
     border: #041e42;
-    padding: 5px;
+    padding: 8px;
+    line-height: 30px;
+    background-color: #ecf1f2
 }
 
 .btn-default {

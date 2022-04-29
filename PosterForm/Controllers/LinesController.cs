@@ -38,136 +38,6 @@ namespace PosterForm.Controllers
             return View(line);
         }
 
-        public ActionResult SaveUploadedFile()
-        {
-            bool isSavedSuccessfully = true;
-            string fName = "";
-            try
-            {
-                foreach (string fileName in Request.Files)
-                {
-                    HttpPostedFileBase file = Request.Files[fileName];
-                    //Save file content goes here
-                    fName = file.FileName;
-                    if (file != null && file.ContentLength > 0)
-                    {
-
-                        var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\WallImages", Server.MapPath(@"\")));
-
-                        string pathString = System.IO.Path.Combine(originalDirectory.ToString(), "imagepath");
-
-                        var fileName1 = Path.GetFileName(file.FileName);
-
-                        bool isExists = System.IO.Directory.Exists(pathString);
-
-                        if (!isExists)
-                            System.IO.Directory.CreateDirectory(pathString);
-
-                        var path = string.Format("{0}\\{1}", pathString, file.FileName);
-                        file.SaveAs(path);
-
-                    }
-
-                }
-
-            }
-            catch (Exception ex)
-            {
-                isSavedSuccessfully = false;
-            }
-
-
-            if (isSavedSuccessfully)
-            {
-                return Json(new { Message = fName });
-            }
-            else
-            {
-                return Json(new { Message = "Error in saving file" });
-            }
-        }
-
-        // GET: Lines/Create
-        public ActionResult Create()
-        {
-            ViewBag.OrderId = new SelectList(db.Order, "Id", "UserName");
-
-
-            ViewBag.PAPERTYPEName = new SelectList(db.PaperType, "Id", "PAPERNameAndPrice");
-            return View();
-        }
-
-        // POST: Lines/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-       
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(FullViewModel model)
-        {
-            PosterFormConnectionEntities db = new PosterFormConnectionEntities();
-
-            if (ModelState.IsValid)
-            {
-
-                Line li = new Line();
-                li.Id = model.Id;
-                li.PaperCost = model.PaperCost;
-                li.CuttingFee = model.CuttingFee;
-                li.ItemUnits = model.ItemUnits;
-                li.LineSubtotal = model.LineSubtotal;
-                li.NumBoards = model.NumBoards;
-                li.NumFrame = model.NumFrame;
-                li.NumLam = model.NumLam;
-                li.NumLamMatte = model.NumLamMatte;
-                li.NumRhyno = model.NumRhyno;
-                li.NumTubes = model.NumTubes;
-                li.OrderId = model.OrderId;
-                li.PaperGrommet = model.PaperGrommet;
-                li.PaperHeight = model.PaperHeight;
-                li.PaperTypeId = model.PAPERTYPEzId;
-                li.PaperTypeName = model.PAPERTYPEzName;
-                li.PaperWidth = model.PaperWidth;
-                li.PaperUnits = model.PaperUnits;
-
-                db.Line.Add(li);
-                db.SaveChanges();
-
-                Order ord = new Order();
-                ord.UserName = model.UserName;
-                ord.CustType = model.CustType;
-                ord.DateIN = DateTime.Now;
-                ord.OperatorIN = model.OperatorIN;
-                ord.OperatorOut = model.OperatorOut;
-                ord.TotalCost = model.TotalCost;
-                ord.Paid = model.Paid;
-                ord.Printed = model.Printed;
-                ord.Ready = model.Ready;
-                ord.DateOUT = model.DateOUT;
-                ord.Location = model.Location;
-                ord.Department = model.Department;
-                ord.FirstName = model.FirstName;
-                ord.LastName = model.LastName;
-                ord.BadOrder = model.BadOrder;
-                ord.Purpose = model.Purpose;
-
-                db.Order.Add(ord);
-                db.SaveChangesAsync();
-
-                PaperType PapTy = new PaperType();
-                PapTy.Id = model.PAPERTYPEzId;
-                PapTy.Name = model.PAPERTYPEzName;
-                PapTy.Price = model.PAPERTYPEzPrice;
-                PapTy.Width = model.PAPERTYPEzWidth;
-
-                
-
-                return RedirectToAction("Index");
-            }
-
-            return View(model);
-        }
-
         public ActionResult SaveUploadedFile(IEnumerable<HttpPostedFileBase> files)
         {
             bool SavedSuccessfully = true;
@@ -217,6 +87,91 @@ namespace PosterForm.Controllers
                 return RedirectToAction("Index", new { Message = "Error in saving file" });
             }
         }
+
+        // GET: Lines/Create
+        public ActionResult Create()
+        {
+            ViewBag.OrderId = new SelectList(db.Order, "Id", "UserName");
+
+
+            ViewBag.PAPERTYPEName = new SelectList(db.PaperType, "Id", "PAPERNameAndPrice");
+
+            //var cow = new SelectList(db.PaperType, "Id", "PAPERNameAndPrice");
+           // ViewData["cow"] = cow;
+            return View();
+        }
+
+        // POST: Lines/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+       
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(FullViewModel model)
+        {
+            PosterFormConnectionEntities db = new PosterFormConnectionEntities();
+
+            if (ModelState.IsValid)
+            {
+
+                Line li = new Line();
+                li.Id = model.Id;
+                li.PaperCost = model.PaperCost;
+                li.CuttingFee = model.CuttingFee;
+                li.ItemUnits = model.ItemUnits;
+                li.LineSubtotal = model.LineSubtotal;
+                li.NumBoards = model.NumBoards;
+                li.NumFrame = model.NumFrame;
+                li.NumLam = model.NumLam;
+                li.NumLamMatte = model.NumLamMatte;
+                li.NumRhyno = model.NumRhyno;
+                li.NumTubes = model.NumTubes;
+                li.OrderId = model.OrderId;
+                li.PaperGrommet = model.PaperGrommet;
+                li.PaperHeight = model.PaperHeight;
+                li.PaperTypeId = model.PaperTypeId;
+                li.PaperTypeName = model.PaperTypeName;
+                li.PaperWidth = model.PaperWidth;
+                li.PaperUnits = model.PaperUnits;
+
+                db.Line.Add(li);
+                db.SaveChanges();
+
+                Order ord = new Order();
+                ord.UserName = model.UserName;
+                ord.CustType = model.CustType;
+                ord.DateIN = DateTime.Now;
+                ord.OperatorIN = model.OperatorIN;
+                ord.OperatorOut = model.OperatorOut;
+                ord.TotalCost = model.TotalCost;
+                ord.Paid = model.Paid;
+                ord.Printed = model.Printed;
+                ord.Ready = model.Ready;
+                ord.DateOUT = model.DateOUT;
+                ord.Location = model.Location;
+                ord.Department = model.Department;
+                ord.FirstName = model.FirstName;
+                ord.LastName = model.LastName;
+                ord.BadOrder = model.BadOrder;
+                ord.Purpose = model.Purpose;
+
+                db.Order.Add(ord);
+                db.SaveChangesAsync();
+
+                PaperType PapTy = new PaperType();
+                PapTy.Id = model.PAPERTYPEzId;
+                PapTy.Name = model.PAPERTYPEzName;
+                PapTy.Price = model.PAPERTYPEzPrice;
+                PapTy.Width = model.PAPERTYPEzWidth;
+
+                
+
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
+
 
         // GET: Lines/Edit/5
         public async Task<ActionResult> Edit(int? id)

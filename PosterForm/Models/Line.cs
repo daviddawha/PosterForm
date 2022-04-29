@@ -27,18 +27,18 @@ namespace PosterForm.Models
         public decimal PaperWidth { get; set; }
         public decimal PaperHeight { get; set; }
         public int PaperUnits { get; set; }
-        public decimal ItemUnits { get; set; }
-        public int NumLam { get; set; }
-        public int PaperGrommet { get; set; }
-        public int NumBoards { get; set; }
+        public decimal ItemUnits { get; set; } = 1;
+        public int NumLam { get; set; } = 0;
+        public int PaperGrommet { get; set; } = 0;
+        public int NumBoards { get; set; } = 0;
         public decimal LineSubtotal { get; set; }
         public int OrderId { get; set; }
-        public int NumFrame { get; set; }
-        public int NumRhyno { get; set; }
-        public int NumTubes { get; set; }
-        public decimal CuttingFee { get; set; }
-        public int NumLamMatte { get; set; }
-    
+        public int NumFrame { get; set; } = 0;
+        public int NumRhyno { get; set; } = 0;
+        public int NumTubes { get; set; } = 0;
+        public decimal CuttingFee { get; set; } = 0;
+        public int NumLamMatte { get; set; } = 0;
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<File> File { get; set; }
         public virtual Order Order { get; set; }

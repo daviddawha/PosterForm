@@ -18,7 +18,7 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress />
+    <Use64BitIISExpress>false</Use64BitIISExpress>
     <IISExpressSSLPort>44376</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -573,7 +573,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Upload\" />
     <Folder Include="Data\" />
-    <Folder Include="Views\Lines\Uploads\" />
+    <Folder Include="Line\SaveUploadedFile\" />
+    <Folder Include="Views\Lines\SaveUploadedFile\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -614,7 +615,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>61268</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44376/</IISUrl>
+          <IISUrl>https://localhost:44374/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
