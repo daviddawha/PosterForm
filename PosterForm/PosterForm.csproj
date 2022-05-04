@@ -57,6 +57,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -171,6 +172,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\UploadCustomHandler.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinesController.cs" />
@@ -569,12 +571,10 @@
     <Content Include="Views\Lines\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AjaxFileUpload\UploadFiles\" />
     <Folder Include="App_Data\" />
     <Folder Include="Content\Upload\" />
     <Folder Include="Data\" />
-    <Folder Include="Line\SaveUploadedFile\" />
-    <Folder Include="Views\Lines\SaveUploadedFile\" />
+    <Folder Include="Images\imagestore\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -37,7 +37,9 @@ namespace PosterForm.Controllers
             }
             return View(line);
         }
-
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult SaveUploadedFile(IEnumerable<HttpPostedFileBase> files)
         {
             bool SavedSuccessfully = true;
@@ -55,7 +57,7 @@ namespace PosterForm.Controllers
 
                         var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\", Server.MapPath(@"\")));
 
-                        string pathString = System.IO.Path.Combine(originalDirectory.ToString(), "imagepath");
+                        string pathString = System.IO.Path.Combine(originalDirectory.ToString(), "imagestore");
 
                         var fileName1 = Path.GetFileName(file.FileName);
 

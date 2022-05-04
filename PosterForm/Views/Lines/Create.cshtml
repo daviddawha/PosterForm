@@ -7,9 +7,9 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm("Create", "Lines", FormMethod.Post))
+@using (Html.BeginForm("Create", "Lines", FormMethod.Post, new { id = "create" }))
 {
-    @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken();
 
     <div class="form-horizontal">
         <h4>Line</h4>
@@ -328,26 +328,15 @@
             </div>
         </div>
 
-        
-                @Html.HiddenFor(model => model.TotalCost)
-                <div id="DisplayCalculatedValue"></div>
-           
+
+        @Html.HiddenFor(model => model.TotalCost)
+        <div id="DisplayCalculatedValue"></div>
+
 
         @Html.HiddenFor(model => model.LineSubtotal)
 
 
         <div>
-
-
-
-
-            
-
-
-            
-
-
-
             <div class="form-group">
                 @Html.LabelFor(model => model.OrderId, "Operator", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -359,40 +348,47 @@
 
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+        <!--<div class="form-group">
+            <div class="col-md-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
-        </div>
+        </div>-->
     </div>
 }
 
-@using (Html.BeginForm("SaveUploadedFile", "Line", FormMethod.Post, new { @name = "myDropzone", id = "myDropzone", @enctype = "multipart/form-data" }))
-{
-    <br />
+<div class="col-md-offset-2 col-md-10">
+    <div class="jumbotron">
+        @using (Html.BeginForm("SaveUploadedFile", "Lines", FormMethod.Post, new { @name = "myDropzone", id = "myDropzone", @enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken();
+            <br />
 
-    <div>
-        <div id="previews" class="dz-default dz-message box__input dropzone">
-            <div style="text-align:center">
-                <i class="fa fa-cloud-upload" style="font-size:23px;position:relative;top:4px;"></i> <span style="margin-left:20px">Drop files  to attach or browse</span>
+            <div>
+                <div id="previews" class="dz-default dz-message box__input dropzone">
+                    <div style="text-align:center">
+                        <i class="fa fa-cloud-upload" style="font-size:23px;position:relative;top:4px;"></i> <span style="margin-left:20px">Drop files  to attach or browse</span>
+                    </div>
+                </div>
+                <div id="previewFiles"></div>
             </div>
-        </div>
-        <div id="previewFiles"></div>
+            <br />
+            <!--<div>
+                <input type="submit" id="Submit" name="Submit" class="btn btn-success m-t-5" value="Submit" />
+            </div>-->
+        }
     </div>
-    <br />
-    <div>
-        <input type="submit" id="Submit" name="Submit" class="btn btn-success m-t-5" value="Submit" />
     </div>
-}
+<div class="col-md-offset-2 col-md-10">
+    <input type="submit" form="create" class="btn btn-default" /></div>
 
 
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <!--<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>-->
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
 
     <script>
         Dropzone.autoDiscover = false;
@@ -406,11 +402,10 @@
                 clickable: '#previews',
                 //preview files container Id
                 previewsContainer: "#previewFiles",
-                autoProcessQueue: false,
+                autoProcessQueue: true,
                 uploadMultiple: true,
                 parallelUploads: 100,
-                maxFiles: 100,
-                url: "/AjaxFileUpload/UploadFiles/", // url here to save file
+                maxFiles: 100, // url here to save file
                 maxFilesize: 100,//max file size in MB,
                 addRemoveLinks: true,
                 dictResponseError: 'Server not Configured',
@@ -445,6 +440,7 @@
                     // On removing file
                     self.on("removedfile", function (file) {
                         console.log(file);
+                        console.log(file.name + " from " + file.url);
                     });
 
                     $('#Submit').on("click", function (e) {
@@ -479,7 +475,7 @@
     </script>
 
 
-    
+
 
     <script type="text/javascript">
 
@@ -592,11 +588,11 @@
 
 
 
-               // $(function () {
-               //     $("#btnSubmit").click(function () {
-               //         $("#postCost").value(totalSum);
-               //     });
-               // });
+                                           // $(function () {
+                                           //     $("#btnSubmit").click(function () {
+                                           //         $("#postCost").value(totalSum);
+                                           //     });
+                                           // });
     </script>
 
 }

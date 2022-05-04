@@ -20,7 +20,32 @@ namespace PosterForm.Controllers
         // GET: Orders
         public async Task<ActionResult> Index(string sortOrder)
         {
-            return View(await db.Order.ToListAsync());
+            ViewBag.Department = string.IsNullOrEmpty(sortOrder) ? "DateIN": "";
+            ViewBag.UserName = string.IsNullOrEmpty(sortOrder) ? "Username" : "";
+            ViewBag.DateIN = sortOrder == "Date" ? "Date_desc" : "Date";
+            ViewBag.TotalCost = string.IsNullOrEmpty(sortOrder) ? "DateIN" : "";
+
+            var dateEntered = from x in db.Order select x;
+            switch (sortOrder)
+            {
+                case "Department":
+                    dateEntered = dateEntered.OrderByDescending(x => x.Department);
+                    break;
+                case "UserName":
+                    dateEntered = dateEntered.OrderByDescending(x => x.UserName);
+                    break;
+                case "DateIN":
+                    dateEntered = dateEntered.OrderBy(x => x.DateIN);
+                    break;
+                case "TotalCost":
+                    dateEntered = dateEntered.OrderByDescending(x => x.TotalCost);
+                    break;
+                default:
+                    dateEntered = dateEntered.OrderByDescending(x => x.DateIN);
+                    break;
+            }
+
+            return View(await dateEntered.ToListAsync());
         }
 
         // GET: MyOrders

@@ -92,7 +92,7 @@ div#mathSection {
         box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
     }
 
-select#Department, select#CustType, select#Location, select#Purpose {
+select#Department, select#CustType, select#Location, select#Purpose, select#OrderId {
     border: #041e42;
     border-style: solid;
 }
