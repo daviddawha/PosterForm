@@ -1,0 +1,280 @@
+﻿@model IEnumerable<PosterForm.Models.Line>
+
+@{decimal runningtotal = 0m; }
+@{decimal linesubtotalminusCost = 0m;}
+@{decimal newlinesubtotal = 0m;}
+
+@{
+    decimal lamcost = 7.87m;
+    decimal foamcost = 5.75m;
+    decimal grommetcost = 0.25m;
+    decimal proedgecost = 0m;
+    decimal rhynocost = 20.15m;
+    decimal tubecost = 9.70m;
+}
+
+@*Temporary Placeholders for Finishing Costs Updated 2022 *@
+@*@{
+        decimal lamcost = ViewBag.lamcost;
+        decimal foamcost = ViewBag.foamcost;
+        decimal grommetcost = ViewBag.grommetcost;
+        decimal proedgecost = ViewBag.proedgecost;
+        decimal rhynocost = ViewBag.rhynocost;
+        decimal tubecost = ViewBag.tubecost;
+    }
+
+
+    @*
+
+    @*Temporary Placeholders for Finishing Costs Updated 7/01/15 *@
+@*@{decimal lamcost = 7.25m;}
+    @{decimal foamcost = 5.08m;}
+    @{decimal grommetcost = 0.25m;}
+    @{decimal proedgecost = 0m;}
+    @{decimal rhynocost = 19.74m;}
+    @{decimal tubecost = 11.59m;}*@
+
+<table class="table table-responsive" id="LinePartial">
+    <tbody style="padding: 0; margin: 0;">
+        <tr style="padding: 0; margin: 0; background-color: #003366; color: #fff; line-height: 30px;">
+            <td style="font-weight: bold;  padding: 10px; text-align: Left">(Units) Line Item</td>
+            <td style="font-weight: bold;  padding: 10px; text-align: center">Width x Height</td>
+            <td style="font-weight: bold; padding: 10px; text-align: center"># of Images</td>
+            <td style="font-weight: bold;  padding: 10px; text-align: right">Subtotal</td>
+        </tr>
+        @foreach (var ol in Model)
+                    {
+                        <tr style="padding: 0; margin: 0;">
+                            <td style="font-weight: bold;  padding: 10px; text-align: Left">
+
+                                @*OLD MEHTOD PRE 9/16*@
+
+                                @*@if (ol.PaperTypeId > 1 && ol.PaperTypeId < 11)
+                                    {<text>(@ol.PaperUnits) @ol.PaperTypeName</text>}
+
+                                    @if (ol.PaperTypeId >= 11 && ol.PaperTypeId <= 19)
+                                    {<text>(@ol.ItemUnits) @ol.PaperTypeName</text> }
+
+                                    @if (ol.PaperTypeId == 20)
+                                    {<text>(@ol.ItemUnits Cubic Inches) @ol.PaperTypeName</text> }*@
+
+                                @*NEW MEHTOD UnitsxCopies 9/16*@
+                                @if ((ol.PaperTypeId > 1 && ol.PaperTypeId < 11) || ol.PaperTypeId == 26 || ol.PaperTypeId == 31 || ol.PaperTypeId == 32 || ol.PaperTypeId == 39)
+                                {<text>(@ol.PaperUnits ft.) @ol.PaperTypeName x @ol.ItemUnits Copies </text>}
+
+                                @if (ol.PaperTypeId >= 11 && ol.PaperTypeId <= 19)
+                                {<text>(@ol.ItemUnits) @ol.PaperTypeName</text> }
+
+                            @*Updated to include new Stratasys 3D Printing 7/1/15*@
+                                @if ((ol.PaperTypeId >= 20 && ol.PaperTypeId <= 23) || (ol.PaperTypeId > 27 && ol.PaperTypeId <= 29) || ol.PaperTypeId == 33 || ol.PaperTypeId == 34)
+                                {<text>(@ol.ItemUnits Cubic Inches) @ol.PaperTypeName</text>}
+
+                                @if (ol.PaperTypeId == 24 || (ol.PaperTypeId >= 35 && ol.PaperTypeId <= 38))
+                                {<text>(@ol.ItemUnits milliliters) @ol.PaperTypeName</text>}
+
+                                @if (ol.PaperTypeId == 25 || ol.PaperTypeId == 30)
+                                {<text>(@ol.ItemUnits Ft.) @ol.PaperTypeName</text>}
+                            </td>
+                            <td style="font-weight: bold;  padding: 10px; text-align: center">@ol.PaperWidth in. x @ol.PaperHeight in.</td>
+                            @{newlinesubtotal = ol.PaperCost * ol.PaperUnits * ol.ItemUnits;}
+                            @{if ((ol.PaperTypeId > 1 && ol.PaperTypeId < 11) || ol.PaperTypeId == 26 || ol.PaperTypeId == 31 || ol.PaperTypeId == 32)
+                                {
+                                    newlinesubtotal = ol.PaperCost * ol.PaperUnits * ol.ItemUnits;
+                                }
+                                else
+                                {
+                                    newlinesubtotal = ol.PaperCost * ol.ItemUnits;
+                                }
+
+                                //if (ol.PaperTypeId >= 11 && ol.PaperTypeId <= 19)
+                                //{
+                                //    newlinesubtotal = ol.PaperCost * ol.ItemUnits;
+                                //}
+                                //if (ol.PaperTypeId >= 20 && ol.PaperTypeId <=24)
+                                //{
+                                //    newlinesubtotal = ol.PaperCost * ol.ItemUnits;
+                                //}
+                                //if (ol.PaperTypeId >= 25)
+                                //{
+                                //    newlinesubtotal = ol.PaperCost * ol.ItemUnits;
+                                //}
+                            }
+                            @*                <td style="font-weight:bold;padding:10px;text-align:right">@ol.lineSubtotal.ToString("c")</td>*@
+                            <td style="font-weight: bold; padding: 10px; text-align: center">@ol.NumImages</td>
+                            <td style="font-weight: bold;  padding: 10px; text-align: right">@newlinesubtotal.ToString("c")</td>
+                            @{runningtotal = runningtotal + ol.LineSubtotal; }
+                        </tr>
+                        @*
+
+                            if (ol.NumLam > 0 || ol.NumBoards > 0 || ol.PaperGrommet > 0 || ol.NumRhyno > 0 || ol.NumFrame > 0 || ol.NumTubes > 0 || ol.CuttingFee > 0)
+                            {<text>
+                            <tr style="padding:0;margin:0;">
+                                <td style="font-weight:bold;padding:10px;text-align:Left">
+                                @if (ol.NumLam > 0)
+                                {<text>(@ol.NumLam ft.) Laminate, </text>}
+                                @if (ol.NumBoards > 0)
+                                {<text>(@ol.NumBoards) 1/4 Foam-cor Board(s), </text>}
+                                @if (ol.PaperGrommet > 0)
+                                {<text>(@ol.PaperGrommet) Grommet(s), </text>}
+                                @if (ol.NumRhyno > 0)
+                                { <text>(@ol.NumRhyno) 1/4 RhynoBoard(s), </text>}
+                                @if (ol.NumFrame > 0)
+                                {
+                                    { <text>(@ol.NumFrame) 8 ft. stick(s) of ProEdge Frames, </text>}
+                                }
+                                @if (ol.NumTubes > 0)
+                                {
+                                    { <text>(@ol.NumTubes) Tube(s)</text>}
+                                }
+                                @if (ol.CuttingFee > 0)
+                                {<text>($@ol.CuttingFee) in Cutting, </text>}
+                                </td>
+                                <td>
+                                </td>
+                                @{linesubtotalminusCost = ol.lineSubtotal - (ol.PaperCost * ol.PaperUnits * ol.ItemUnits);}
+                                <td style="font-weight:bold;padding:10px;text-align:right">@linesubtotalminusCost.ToString("c")</td>
+                            </tr>
+                            </text>}
+                        *@
+
+                        if (ol.NumLam > 0)
+                        {<text>
+                                <tr style="padding:0;margin:0;">
+                                    <td style="font-weight:bold;padding:10px;text-align:Left">
+                                        @if (ol.NumLam > 0)
+                                        {<text>(@ol.NumLam ft.) <b>Gloss</b> Laminate, </text>}
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    @{
+                                        linesubtotalminusCost = ol.NumLam * lamcost;
+                                    }
+                                    <td style="font-weight:bold;padding:10px;text-align:right">@linesubtotalminusCost.ToString("c")</td>
+                                </tr>
+                        </text>}
+
+                    if (ol.NumLamMatte > 0)
+                    {<text>
+                            <tr style="padding:0;margin:0;">
+                                <td style="font-weight:bold;padding:10px;text-align:Left">
+                                    @if (ol.NumLamMatte > 0)
+                                    {<text>(@ol.NumLamMatte ft.) <b>Matte</b> Laminate, </text>}
+                                </td>
+                                <td></td>
+                                <td></td>
+                                @{linesubtotalminusCost = ol.NumLamMatte * lamcost;}
+                                <td style="font-weight:bold;padding:10px;text-align:right">@linesubtotalminusCost.ToString("c")</td>
+                            </tr>
+                    </text>}
+
+                if (ol.NumBoards > 0)
+                {<text>
+                        <tr style="padding:0;margin:0;">
+                            <td style="font-weight:bold;padding:10px;text-align:Left">
+                                @if (ol.NumBoards > 0)
+                                {<text>(@ol.NumBoards) 1/4 Foam-cor Board(s), </text>}
+                            </td>
+                            <td></td>
+                            <td></td>
+                            @{linesubtotalminusCost = ol.NumBoards * foamcost;}
+                            <td style="font-weight:bold;padding:10px;text-align:right">@linesubtotalminusCost.ToString("c")</td>
+                        </tr>
+                </text>}
+
+            if (ol.PaperGrommet > 0)
+            {<text>
+                    <tr style="padding:0;margin:0;">
+                        <td style="font-weight:bold;padding:10px;text-align:Left">
+                            @if (ol.PaperGrommet > 0)
+                            {<text>(@ol.PaperGrommet) Grommet(s), </text>}
+                        </td>
+                        <td></td>
+                        <td></td>
+                        @{linesubtotalminusCost = ol.PaperGrommet * grommetcost;}
+                        <td style="font-weight:bold;padding:10px;text-align:right">@linesubtotalminusCost.ToString("c")</td>
+                    </tr>
+            </text>}
+
+        if (ol.NumRhyno > 0)
+        {<text>
+                <tr style="padding:0;margin:0;">
+                    <td style="font-weight:bold;padding:10px;text-align:Left">
+                        @if (ol.NumRhyno > 0)
+                        {<text>(@ol.NumRhyno) 1/4 RhynoBoard(s), </text>}
+                    </td>
+                    <td></td>
+                    <td></td>
+                    @{linesubtotalminusCost = ol.NumRhyno * rhynocost;}
+                    <td style="font-weight:bold;padding:10px;text-align:right">@linesubtotalminusCost.ToString("c")</td>
+                </tr>
+        </text>}
+
+    if (ol.NumFrame > 0)
+    {<text>
+            <tr style="padding:0;margin:0;">
+                <td style="font-weight:bold;padding:10px;text-align:Left">
+                    @if (ol.NumFrame > 0)
+                    {
+                        {<text>(@ol.NumFrame) 8 ft. stick(s) of ProEdge Frames, </text>}
+                }
+                </td>
+                <td></td>
+                <td></td>
+                @{linesubtotalminusCost = ol.NumFrame * proedgecost;}
+                <td style="font-weight:bold;padding:10px;text-align:right">@linesubtotalminusCost.ToString("c")</td>
+            </tr>
+    </text>}
+
+if (ol.NumTubes > 0)
+{<text>
+        <tr style="padding:0;margin:0;">
+            <td style="font-weight:bold;padding:10px;text-align:Left">
+                @if (ol.NumTubes > 0)
+                {
+                    {<text>(@ol.NumTubes) Tube(s)</text>}
+            }
+            </td>
+            <td></td>
+            <td></td>
+            @{linesubtotalminusCost = ol.NumTubes * tubecost;}
+            <td style="font-weight:bold;padding:10px;text-align:right">@linesubtotalminusCost.ToString("c")</td>
+        </tr>
+</text>}
+
+if (ol.CuttingFee > 0)
+{<text>
+    <tr style="padding:0;margin:0;">
+        <td style="font-weight:bold;padding:10px;text-align:Left">
+            @if (ol.CuttingFee > 0)
+            {<text>($@ol.CuttingFee) in Cutting, </text>}
+        </td>
+        <td></td>
+        <td></td>
+        @{linesubtotalminusCost = ol.CuttingFee;}
+        <td style="font-weight:bold;padding:10px;text-align:right">@linesubtotalminusCost.ToString("c")</td>
+    </tr>
+</text>}
+
+<tr style="padding: 0; margin: 0;">
+    <td colspan="4" style="font-size: 16px; padding: 10px; color: grey">
+        Files:
+        @foreach (var f in ol.File)
+        {
+            @(f.Name + ", ");
+        }
+    </td>
+</tr>
+}
+        <tr style="padding: 0; margin: 0;" class="TotalDisplayLine">
+            <td>
+                <span style="margin-top: 0;font-weight:bold;">Order Total</span>
+            </td>
+            <td></td>
+            <td></td>
+            <td style="text-align: right">
+                <span style="margin-top: 0;font-weight:bold;">Total: @runningtotal.ToString("c")</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+

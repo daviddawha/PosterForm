@@ -93,11 +93,11 @@ namespace PosterForm.Controllers
         // GET: Lines/Create
         public ActionResult Create()
         {
-            ViewBag.OrderId = new SelectList(db.Order, "Id", "UserName");
+            ViewBag.OperatorIN = new SelectList(db.UserInRole, "UserName", "UserName");
 
 
-            ViewBag.PAPERTYPEName = new SelectList(db.PaperType, "Id", "PAPERNameAndPrice");
-
+            ViewBag.PAPERTYPEId = new SelectList(db.PaperType, "Id", "PAPERNameAndPrice");
+            
             //var cow = new SelectList(db.PaperType, "Id", "PAPERNameAndPrice");
            // ViewData["cow"] = cow;
             return View();
@@ -113,33 +113,20 @@ namespace PosterForm.Controllers
         {
             PosterFormConnectionEntities db = new PosterFormConnectionEntities();
 
+
+
             if (ModelState.IsValid)
             {
 
-                Line li = new Line();
-                li.Id = model.Id;
-                li.PaperCost = model.PaperCost;
-                li.CuttingFee = model.CuttingFee;
-                li.ItemUnits = model.ItemUnits;
-                li.LineSubtotal = model.LineSubtotal;
-                li.NumBoards = model.NumBoards;
-                li.NumFrame = model.NumFrame;
-                li.NumLam = model.NumLam;
-                li.NumLamMatte = model.NumLamMatte;
-                li.NumRhyno = model.NumRhyno;
-                li.NumTubes = model.NumTubes;
-                li.OrderId = model.OrderId;
-                li.PaperGrommet = model.PaperGrommet;
-                li.PaperHeight = model.PaperHeight;
-                li.PaperTypeId = model.PaperTypeId;
-                li.PaperTypeName = model.PaperTypeName;
-                li.PaperWidth = model.PaperWidth;
-                li.PaperUnits = model.PaperUnits;
+                PaperType PapTy = new PaperType();
+                PapTy.Id = model.PAPERTYPEzId;
+                PapTy.Name = model.PAPERTYPEzName;
+                PapTy.Price = model.PAPERTYPEzPrice;
+                PapTy.Width = model.PAPERTYPEzWidth;
 
-                db.Line.Add(li);
-                db.SaveChanges();
 
                 Order ord = new Order();
+                ord.Id = model.Id;
                 ord.UserName = model.UserName;
                 ord.CustType = model.CustType;
                 ord.DateIN = DateTime.Now;
@@ -158,20 +145,56 @@ namespace PosterForm.Controllers
                 ord.Purpose = model.Purpose;
 
                 db.Order.Add(ord);
+                db.SaveChanges();
+
+                Line li = new Line();
+                li.PaperCost = model.PaperCost;
+                li.CuttingFee = model.CuttingFee;
+                li.ItemUnits = model.ItemUnits;
+                li.LineSubtotal = model.LineSubtotal;
+                li.NumBoards = model.NumBoards;
+                li.NumFrame = model.NumFrame;
+                li.NumLam = model.NumLam;
+                li.NumLamMatte = model.NumLamMatte;
+                li.NumRhyno = model.NumRhyno;
+                li.NumTubes = model.NumTubes;
+                li.OrderId = model.Id;
+                li.PaperGrommet = model.PaperGrommet;
+                li.PaperHeight = model.PaperHeight;
+                li.PaperTypeId = model.PaperTypeId;
+                li.PaperTypeName = model.PaperTypeName;
+                li.PaperWidth = model.PaperWidth;
+                li.PaperUnits = model.PaperUnits;
+                li.NumImages = model.NumImages;
+
+                var selectedValue = model.PaperTypeId;
+                if(selectedValue == 2)
+                {
+                    li.PaperTypeName = "Layout Adjustment";
+                }
+                if(selectedValue == 3)
+                {
+                    li.PaperTypeName = "GLOSS";
+                }
+
+                db.Line.Add(li);
                 db.SaveChangesAsync();
 
-                PaperType PapTy = new PaperType();
-                PapTy.Id = model.PAPERTYPEzId;
-                PapTy.Name = model.PAPERTYPEzName;
-                PapTy.Price = model.PAPERTYPEzPrice;
-                PapTy.Width = model.PAPERTYPEzWidth;
+
 
                 
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
             }
 
             return View(model);
+        }
+
+        public async Task<ActionResult> Receipt(int? OrderId)
+        {
+            Line line = await db.Line.FindAsync(OrderId);
+
+            return View(line);
         }
 
 

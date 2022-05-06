@@ -12,16 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Department)
+            @Html.Label("NetID")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UserName)
+            @Html.Label("Order #")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DateIN)
+            @Html.Label("Date Received")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TotalCost)
+            @Html.Label("Total Cost")
         </th>
         <th id="Paid-label">
             @Html.DisplayNameFor(model => model.Paid)
@@ -37,45 +37,50 @@
         {
 
 
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Department)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateIN)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalCost)
-                </td>
-                <td>
-                    @if (item.Paid == true)
-                    {
-                    <span class="checkmark">
-                        <div class="checkmark_stem"></div>
-                        <div class="checkmark_kick"></div>
-                    </span>
-                    }
-                    else
-                    {
-                <span class="checkmark">
-                    <p>NO!</p>
-                </span>
-                    }
-                </td>
-                <td>
-                    @if (item.Printed == true)
-                    {
-                        <input class="printedCheckBox" type="checkbox" name="@item.Id" checked="checked" aria-labelledby="Printed-label" />
-                    }
-                    else
-                    {
-                        <input class="printedCheckBox" type="checkbox" name="@item.Id" aria-labelledby="Printed-label" />
-                    }
-                </td>
-            </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.UserName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DateIN)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TotalCost)
+    </td>
+    <td>
+        @if (item.Paid == true)
+        {
+            <b>YES</b>
+        }
+        else
+        {
+            <span class="checkmark">
+                <p>NO</p>
+            </span>
+        }
+    </td>
+    <td>
+        @if (item.Printed == true)
+        {
+            <span class="checkmark">
+                <div class="checkmark_stem"></div>
+                <div class="checkmark_kick"></div>
+            </span>
+        }
+        else
+        {
+            <span class="checkmark">
+                <p>NO</p>
+            </span>
+        }
+    </td>
+    <td style="">
+        @Html.ActionLink("Receipt", "Receipt", new { id = item.Id })
+    </td>
+</tr>
         }
     }
 

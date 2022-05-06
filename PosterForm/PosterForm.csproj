@@ -569,6 +569,9 @@
     <Content Include="Views\Lines\Details.cshtml" />
     <Content Include="Views\Lines\Edit.cshtml" />
     <Content Include="Views\Lines\Index.cshtml" />
+    <Content Include="Views\Orders\Receipt.cshtml" />
+    <Content Include="Views\Shared\NotePartial.cshtml" />
+    <Content Include="Views\Shared\LinePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

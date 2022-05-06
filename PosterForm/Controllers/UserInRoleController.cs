@@ -11,6 +11,7 @@ using PosterForm.Models;
 
 namespace PosterForm.Controllers
 {
+    [Authorize(Users ="hthomas, lordd100")]
     public class UserInRoleController : Controller
     {
         private PosterFormConnectionEntities db = new PosterFormConnectionEntities();

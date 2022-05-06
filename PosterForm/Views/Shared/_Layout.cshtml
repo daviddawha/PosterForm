@@ -26,9 +26,13 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Create", "Orders")</li>
+                    <li>@Html.ActionLink("Home", "Create", "Lines")</li>
+                    <li>@Html.ActionLink("Previous Orders", "MyOrders", "Orders")</li>
                     <li>@Html.ActionLink("Queue", "Index", "Orders")</li>
-                    <li>@Html.ActionLink("My Past Orders", "MyOrders", "Orders")</li>
+                    @if (User.Identity.IsAuthenticated && (User.Identity.Name.Equals("hthomas")) || (User.Identity.Name.Equals("lordd100")))
+                    {
+                        <li>@Html.ActionLink("Manage Users", "Index", "UserInRole")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -38,7 +42,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - PosterForm Refresh</p>
+            <p>&copy; @DateTime.Now.Year @@One PosterForm</p>
         </footer>
     </div>
 

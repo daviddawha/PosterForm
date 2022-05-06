@@ -55,9 +55,26 @@ namespace PosterForm.Controllers
                                                      orderby s.DateIN descending //Sorts the studentList collection in ascending order
                                                      select s;
 
-            return View(await db.Order.ToListAsync());
+            return View(await orderByResult.ToListAsync());
 
             
+        }
+
+        // GET: Receipts
+        public async Task<ActionResult> Receipt(int? id)
+        {
+            var OrderId = id;
+            string query = "SELECT * FROM Order WHERE Id = {0}";
+            Order order = await db.Order.FindAsync(id);
+            Line line = await db.Line.FindAsync(OrderId);
+
+            var model = new FullViewModel
+            {
+
+            };
+
+
+            return View(order);
         }
 
         // GET: Orders/Details/5

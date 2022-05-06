@@ -38,6 +38,7 @@ namespace PosterForm.Models
         public int NumTubes { get; set; } = 0;
         public decimal CuttingFee { get; set; } = 0;
         public int NumLamMatte { get; set; } = 0;
+        public int NumImages { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<File> File { get; set; }

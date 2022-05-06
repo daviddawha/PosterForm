@@ -31,7 +31,8 @@
                 </ol>
                 <br />
                 <br />
-                <input type="submit" id="placeOrder" value="I Agree to the Terms and Conditions Above" />
+                @Html.ActionLink("Submit", "Create", "Lines", null, new { @class = "btn btn-primary btn-large" })
+
             </div>
         </li>
     </ol>

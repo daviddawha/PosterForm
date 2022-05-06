@@ -6,10 +6,20 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PosterForm.Models
 {
+
     public class FullViewModel
     {
+        public FullViewModel()
+        {
+            this.Line = new HashSet<Line>();
+            this.Note = new HashSet<Note>();
+            this.OrderPack = new HashSet<OrderPack>();
+            this.File = new HashSet<File>();
+        }
+
         public int Id { get; set; }
         public string UserName { get; set; }
+        [Required(ErrorMessage = "Customer Type is required.")]
         public string CustType { get; set; }
         public Nullable<System.DateTime> DateIN { get; set; }
         public string OperatorIN { get; set; }
@@ -19,7 +29,9 @@ namespace PosterForm.Models
         public Nullable<bool> Ready { get; set; }
         public string OperatorOut { get; set; }
         public Nullable<System.DateTime> DateOUT { get; set; }
+        [Required(ErrorMessage = "Please select Location.")]
         public string Location { get; set; }
+        [Required(ErrorMessage = "Department is required.")]
         public string Department { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -43,6 +55,7 @@ namespace PosterForm.Models
         public int NumTubes { get; set; }
         public decimal CuttingFee { get; set; }
         public int NumLamMatte { get; set; }
+        public int NumImages { get; set; }
 
 
         public int PAPERTYPEzId { get; set; }
@@ -50,5 +63,11 @@ namespace PosterForm.Models
         public int PAPERTYPEzWidth { get; set; }
         public decimal PAPERTYPEzPrice { get; set; }
         public string PAPERNameAndPrice { get { return this.PAPERTYPEzName + " " + this.PAPERTYPEzPrice; } }
+
+        public virtual ICollection<OrderPack> OrderPack { get; set; }
+        public virtual ICollection<Line> Line { get; set; }
+        public virtual ICollection<Note> Note { get; set; }
+        public virtual ICollection<File> File { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

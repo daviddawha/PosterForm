@@ -1,0 +1,9 @@
+﻿@model IEnumerable<PosterForm.Models.Note>
+
+@foreach (var n in Model)
+{
+    <div>
+        <strong>@n.DateEntered - @n.Author:</strong>&nbsp
+        @n.Text&nbsp
+    </div>
+}

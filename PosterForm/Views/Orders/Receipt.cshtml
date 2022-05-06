@@ -1,0 +1,77 @@
+﻿@model PosterForm.Models.Order
+
+@{
+    ViewBag.Title = "Receipt";
+}
+
+<h2>Receipt</h2>
+
+<div id="receiptContainer">
+    <div id="receiptHeader">
+        <p class="order-info">
+            <strong>Order:   </strong><span style="color: red">@Model.Id</span>   <strong>NetID:   </strong><span style="color: red">@Model.UserName</span>   <strong>Purpose:   </strong><span style="color: red">@Model.Purpose</span>
+        </p>
+        <p class="order-info">
+            <strong>Name:   </strong><span style="color: red">@Model.FirstName @Model.LastName</span>
+            <span style="color: grey">(For Job Status Call: 775-682-5696)</span>
+        </p>
+    </div>
+    @Html.Partial("LinePartial", Model.Line)
+    <table class="orderDetailsTbl" style="padding: 0; margin: 5px 0 0 0; width: 100%;">
+        <tr class="orderDetailsTblRow" style="padding: 0; margin: 0">
+            <h2>Order Details:</h2>
+        </tr>
+        <tr class="orderDetailsTblRow" style="padding: 0; margin: 0">
+            <td><span><strong>Customer Type:</strong> @Model.CustType</span></td>
+            <td><span><strong>Purpose:</strong> @Model.Purpose</span></td>
+        </tr>
+
+        <tr class="orderDetailsTblRow" style="padding: 0; margin: 0">
+            <td><span><strong>Location:</strong> @Model.Location</span></td>
+            <td><span><strong>Department:</strong> @Model.Department</span></td>
+        </tr>
+        <tr class="orderDetailsTblRow" style="padding: 0; margin: 0">
+            <td><span><strong>Received by:</strong> @Model.OperatorIN</span></td>
+            <td><span><strong>Completed by:</strong> @Model.OperatorOut</span></td>
+        </tr>
+        <tr class="orderDetailsTblRow" style="padding: 0; margin: 0">
+            <td><span><strong>Submitted on:</strong> @Model.DateIN</span></td>
+            <td><span><strong>Completed on:</strong> @Model.DateOUT</span></td>
+        </tr>
+    </table>
+</div>
+
+@if (Model.OrderPack.Any())
+{
+    <h1 style="padding: 0 0 5px 0;" id="Packs-label">Pack Files:</h1>
+    <table class="table table-responsive table-striped">
+        <thead>
+            <tr>
+                <th>File Name</th>
+                <th>Color</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pack in Model.OrderPack)
+            {
+                <tr>
+                    <td>@pack.FileName</td>
+                    <td>@pack.Color</td>
+                    <td>@pack.Quantity</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<!--
+<h1 style="padding: 0 0 5px 0;" id="Notes-label">Notes:</h1>
+@Html.Partial("NotePartial", Model.Note)
+<form method="post" action="AddNote" id="noteform" style="margin: 15px 0 0 0; border-bottom: none!important;">
+    <textarea id="noteText" class="noteText" name="content" aria-labelledby="Notes-label"></textarea>
+    <span id="Operator-label">Operator:</span>
+    <input id="noteAuthor" class="noteAuthor" type="text" aria-labelledby="Operator-label" />
+    <input type="button" class="submitNote" id="print" name="btnPrint" value="Print Receipt" />
+    <input type="button" class="submitNote" id="submitNote" name="@Model.Id" value="Submit Note" />
+</form>
+    -->
