@@ -96,7 +96,7 @@ namespace PosterForm.Controllers
             ViewBag.OperatorIN = new SelectList(db.UserInRole, "UserName", "UserName");
 
 
-            ViewBag.PAPERTYPEId = new SelectList(db.PaperType, "Id", "PAPERNameAndPrice");
+            ViewBag.PaperCost = new SelectList(db.PaperType, "Price", "PAPERNameAndPrice");
             
             //var cow = new SelectList(db.PaperType, "Id", "PAPERNameAndPrice");
            // ViewData["cow"] = cow;

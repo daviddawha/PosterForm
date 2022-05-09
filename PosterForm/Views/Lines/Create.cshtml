@@ -246,7 +246,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.PAPERTYPEzName, "Item Type: ", htmlAttributes: new { @class = "control-label col-md-2 labelshort" })
                     <div class="col-md-10">
-                        @Html.DropDownList("PAPERTYPEId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.DropDownList("PaperCost", null, htmlAttributes: new { @class = "form-control", @id = "PaperCost" })
                         @Html.ValidationMessageFor(model => model.PAPERTYPEzName, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -595,7 +595,12 @@
             var width = getWidth();
             var height = getHeight();
             var itemUnits = getItemUnits();
+            var numImages = getNumImages();
+            var holder = 0;
 
+            if (width < 19 && height < 19 || width != 0 && height != 0) {
+                holder
+            }
 
 
 
